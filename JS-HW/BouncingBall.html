@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>bouncing ball</title>
+    <style>
+
+        .box {
+          display: block;
+          border: 4px solid black;
+          width: 500px;
+          height: 400px;
+          position: relative;
+          //ball can't get out
+          overflow: hidden;
+          margin: 50px auto;
+        }
+        #ball {
+          position: absolute;
+          width: 60px;
+          height: 60px;
+          background-color: green;
+          border-radius: 100%;
+          top: 0;
+          left: 0;
+        }
+    </style>
+    <script>
+        // starting coordinates
+        var x = 5;
+        var y = 5;
+        // how much to move each step
+        var xoffset = 10;
+        var yoffset = 10;
+        // max values so the ball stays inside 500×400 container
+        var max_x = 500 - 50; // container width minus ball diameter
+        var max_y = 400 - 50; // container height minus ball diameter
+
+        // this does the actual moving + bouncing
+        function moveBall() {
+          x += xoffset;
+          y += yoffset;
+
+          // move the div around
+          var ball = document.getElementById('ball');
+          ball.style.left = x + 'px';
+          ball.style.top  = y + 'px';
+
+          // hit a wall -> reverse direction
+          if (x + xoffset > max_x || x + xoffset < 0) {
+            xoffset *= -1;
+          }
+          if (y + yoffset > max_y || y + yoffset < 0) {
+            yoffset *= -1;
+          }
+          // do it again in 100ms
+          setTimeout(moveBall, 100);
+        }
+        //start when the page opens
+        window.onload = function() {
+          moveBall();
+        };
+    </script>
+</head>
+<body>
+<div class="box">
+    <div id="ball"></div>
+</div>
+</body>
+</html>

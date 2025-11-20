@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>digital clock</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 100px;
+            font-family: Arial, sans-serif;
+        }
+        #clock {
+            font-size: 150px;
+            margin-top: 60px;
+        }
+        button {
+            font-size: 80px;
+            padding: 15px 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- this is the button the user clicks to start the clock -->
+<button id="showButton">let it show</button>
+<!-- this is where the clock time will be shown -->
+<div id="clock"></div>
+
+<script>
+    // keep track of the timeout
+    let timerId;
+    // helper function to add leading zeros if needed
+    function formatTime(number, length = 2) {
+        return number.toString().padStart(length, '0');
+    }
+    // this function updates the clock display
+    function updateClock() {
+        const now = new Date(); // get the current time
+        const hours = formatTime(now.getHours()); // get hours and format
+        const minutes = formatTime(now.getMinutes()); // get minutes and format
+        const seconds = formatTime(now.getSeconds()); // get seconds and format
+        const milliseconds = formatTime(Math.floor(now.getMilliseconds() / 10)); // get 2-digit milliseconds
+        // put it all together in the format we want
+        const timeString = `${hours}:${minutes}:${seconds}:${milliseconds}`;
+        // show the time on the page
+        document.getElementById('clock').textContent = timeString;
+        // keep updating every 100 milliseconds
+        timerId = setTimeout(updateClock, 100);
+    }
+    // when the user clicks the button
+    document.getElementById('showButton').addEventListener('click', function() {
+        updateClock(); // start the clock
+        this.disabled = true; // disable the button so they can't click it again
+    });
+</script>
+</body>
+</html>

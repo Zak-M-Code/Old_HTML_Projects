@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>square & cube</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          text-align: center;
+          margin-top: 100px;
+        }
+        table {
+          margin: 24px auto;
+          border-collapse: collapse;
+        }
+        th, td {
+          border: 4px solid black;
+          padding: 15px 15px;
+        }
+        th {
+          background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    // helper to keep asking until user gives a number from 1 to 20
+    function getNumber(msg) {
+      let n;
+      do {
+        n = parseInt(prompt(msg), 10);
+      } while (isNaN(n) || n < 1 || n > 20);
+      return n;
+    }
+
+    // ask for the two inputs
+    const first = getNumber('enter a number between 1 and 20:');
+    const second = getNumber('enter another number between 1 and 20:');
+
+    // figure out which is smaller/larger
+    const start = Math.min(first, second);
+    const end   = Math.max(first, second);
+
+    // build a table to show number, its square, and its cube
+    const table = document.createElement('table');
+
+    // header row
+    const headerRow = document.createElement('tr');
+    ['number', 'square', 'cube'].forEach(text => {
+      const th = document.createElement('th');
+      th.textContent = text;
+      headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+
+    // one row per value from start to end
+    for (let i = start; i <= end; i++) {
+      const tr = document.createElement('tr');
+
+      // number, square, cube
+      [i, i * i, i * i * i].forEach(val => {
+        const td = document.createElement('td');
+        td.textContent = val;
+        tr.appendChild(td);
+      });
+
+      table.appendChild(tr);
+    }
+
+    // stick the table on the page
+    document.body.appendChild(table);
+</script>
+
+</body>
+</html>

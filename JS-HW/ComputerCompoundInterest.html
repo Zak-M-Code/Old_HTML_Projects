@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculating Compound Interest</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          text-align: center;
+          margin-top: 50px;
+        }
+        table {
+          margin: 25px auto;
+          border-collapse: collapse;
+          width: 350px;
+        }
+        th, td {
+          border: 3px solid black;
+          padding: 10px;
+        }
+        th {
+          background-color: blue;
+          color: white;
+        }
+        .yellow { background-color: yellow; }
+        .blue   { background-color: lightblue; }
+        .white  { background-color: white; }
+    </style>
+</head>
+<body>
+
+<script>
+    // ask the user for the starting amount
+    let Amount_On_Deposit = parseFloat(prompt('enter Amount_On_Deposit amount (e.g. 2000):', '2000'));
+    // ask the user for the annual interest rate
+    let rate = parseFloat(prompt('enter annual interest rate (percent):', '10'));
+
+    // make a heading for our table
+    const heading = document.createElement('h2');
+    heading.textContent = 'Calculating Compound Interest';
+    heading.style.color = 'black';
+    heading.style.marginBottom = '0';
+    document.body.appendChild(heading);
+
+    // build the table element
+    const table = document.createElement('table');
+
+    // header row
+    const headerRow = document.createElement('tr');
+    const thYear = document.createElement('th');
+    thYear.textContent = 'year';
+    const thAmount = document.createElement('th');
+    thAmount.textContent = 'Amount_On_Deposit';
+    headerRow.appendChild(thYear);
+    headerRow.appendChild(thAmount);
+    table.appendChild(headerRow);
+
+    // calculate and add each year
+    let amount = Amount_On_Deposit;
+    for (let year = 1; year <= 10; year++) {
+      // apply interest for this year
+      amount = amount * (1 + rate / 100);
+
+      // create a row for this year
+      const tr = document.createElement('tr');
+
+      // pick the right bg color class
+      // year%3 === 1 -> years 1,4,7,10   -> yellow
+      // year%3 === 2 -> years 2,5,8      -> blue
+      // year%3 === 0 -> years 3,6,9      -> white
+      if (year % 3 === 1) {
+        tr.className = 'yellow';
+      } else if (year % 3 === 2) {
+        tr.className = 'blue';
+      } else {
+        tr.className = 'white';
+      }
+      // year cell
+      const tdYear = document.createElement('td');
+      tdYear.textContent = year;
+      // amount cell (two decimal places)
+      const tdAmount = document.createElement('td');
+      tdAmount.textContent = amount.toFixed(2);
+
+      tr.appendChild(tdYear);
+      tr.appendChild(tdAmount);
+      table.appendChild(tr);
+    }
+
+    // put table onto the page
+    document.body.appendChild(table);
+</script>
+</body>
+</html>
