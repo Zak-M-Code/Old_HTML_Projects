@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<h1>Reservations Form</h1>
+
+<form method="post" action="https://www.montclair.edu/library/2022/09/06/reserve-a-study-space/">
+    <input type="hidden" name="recipient" value="mont@clair.com">
+    <input type="hidden" name="subject" value="Reservations Form">
+    <input type="hidden" name="redirect" value="main.html">
+
+    <table border="0" cellspacing="5" cellpadding="5">
+        <tr>
+            <td><label for="name">Full Name:</label></td>
+            <td><input id="name" name="name" type="text" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="email">MSU E-mail Address:</label></td>
+            <td><input id="email" name="email" type="email" placeholder="name@montclair.edu" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="date">Request Date:</label></td>
+            <td><input id="date" name="date" type="date" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="building">Select a building:</label></td>
+            <td>
+                <select id="building" name="building">
+                    <option value="CCIS">CCIS</option>
+                    <option value="CELS">CELS</option>
+                    <option value="Richardson Hall">Richardson Hall</option>
+                    <option value="Science Hall">Science Hall</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="submit" value="Submit">
+                <input type="reset" value="Clear">
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+</body>
+</html>
